@@ -1,7 +1,9 @@
+//Require
 const express = require('express');
 const routes = require('./routes');
 // import sequelize connection
-
+const sequelize = require('./config/connection');
+// Variables for exress and local port
 const app = express();
 const PORT = process.env.PORT || 3001;
 
