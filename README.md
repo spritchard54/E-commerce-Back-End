@@ -1,31 +1,26 @@
 # E-commerce-Back-End ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-![Readme.md Screenshot](./)
+![Readme.md Screenshot](./assets/images/Screenshot%202024-01-21%20at%209.25.48 AM.png)
 
 ## Table of Contents
 [Description](#description)<br>
-[Installation](#installation)<br>
 [Usage](#usage)<br>
 [Contributing](#contributing)<br>
-[Tests](#tests)<br>
 [License Link](#license-link)<br>
 [License Description](#license-description)<br>
 [Questions](#questions)
 
 ## Description
-
-
-## Installation
-No installation required.
+This repo demonstrates how the back end of a website is constructed using Object Relational Mapping or ORM. In this repo you will find javascript files containing models and routes used to create, read, update and delete (CRUD) files in a mysql2 database.
     
 ## Usage 
-1. 
+1. If you would like to learn more you can download or fork the files in this repo. 
+2. The models folder contains each of the models that help shape the database tables
+3. The routes folder contains the javascript code needed to cread, read, update and delete files from the database.
+4. You will need to update the .env.example file with your db connection credentials in order to connect to the database (ecommerce_db).
     
 ## Contributing 
 EDX bootcamp instructors.
-    
-## Tests
-No tests were run for this application.
 
 ## License Link
 https://www.mit.edu/~amini/LICENSE.md

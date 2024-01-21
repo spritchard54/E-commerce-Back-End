@@ -2,6 +2,7 @@ const router = require('express').Router();
 // Import the Category and Poduct models
 const { Category, Product } = require('../../models');
 
+
 // The `/api/categories` endpoint
 
 router.get('/', async (req, res) => {
@@ -49,6 +50,9 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
+  console.log("put");
+  console.log(req.params);
+  console.log(req.body);
   // update a category by its `id` value
   try {
     const categoryData = await Category.update(req.body, {
