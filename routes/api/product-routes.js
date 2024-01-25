@@ -1,4 +1,5 @@
 const router = require('express').Router();
+// Import the Category and Poduct models
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
@@ -7,8 +8,12 @@ router.get('/', async (req, res) => {
   try {
     const productData = await Product.findAll({
       // be sure to include its associated Category and Tag data
-      indclude: [{ model: Category }, { model: Tag }],
+      include: [Category, {
+        model: Tag,
+        through: ProductTag
+      }],
     });
+
     res.status(200).json(productData);
   } catch (err) {
     res.status(500).json(err);
@@ -16,18 +21,19 @@ router.get('/', async (req, res) => {
 });
 
 // get one product by id
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
+    // find a single product by its `id`
     const productData = await Product.findByPk(req.params.id, {
       // be sure to include its associated Category and Tag data
       include: [
-        {model: Category},
-        {model: Tag}
+        { model: Category },
+        { model: Tag }
       ]
     })
-    if(!productData) {
+    if (!productData) {
       res.status(404).json({
-        message: 'No product with that id'
+        message: 'No product associated with that id'
       })
     }
     res.status(200).json(productData);
@@ -46,26 +52,26 @@ router.post('/', async (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
-Product.create(req.body)
-  .then((product) => {
-    // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-    if (req.body.tagIds.length) {
-      const productTagIdArr = req.body.tagIds.map((tag_id) => {
-        return {
-          product_id: product.id,
-          tag_id,
-        };
-      });
-      return ProductTag.bulkCreate(productTagIdArr);
-    }
-    // if no product tags, just respond
-    res.status(200).json(product);
-  })
-  .then((productTagIds) => res.status(200).json(productTagIds))
-  .catch((err) => {
-    console.log(err);
-    res.status(400).json(err);
-  });
+  Product.create(req.body)
+    .then((product) => {
+      // if there's product tags, we need to create pairings to bulk create in the ProductTag model
+      if (req.body.tagIds.length) {
+        const productTagIdArr = req.body.tagIds.map((tag_id) => {
+          return {
+            product_id: product.id,
+            tag_id,
+          };
+        });
+        return ProductTag.bulkCreate(productTagIdArr);
+      }
+      // if no product tags, just respond
+      res.status(200).json(product);
+    })
+    .then((productTagIds) => res.status(200).json(productTagIds))
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+    });
 });
 
 // update product
@@ -118,9 +124,9 @@ router.delete('/:id', async (req, res) => {
   try {
     // delete one product by its `id` value
     const productData = await Product.destroy({
-      where: {id: req.params.id}
+      where: { id: req.params.id }
     })
-    if(!productData) {
+    if (!productData) {
       res.status(404).json({
         message: 'No prodcut with that id'
       })

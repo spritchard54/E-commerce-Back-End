@@ -2,22 +2,21 @@ const router = require('express').Router();
 // Import the Category and Poduct models
 const { Category, Product } = require('../../models');
 
-
 // The `/api/categories` endpoint
-
+// get all categories - working
 router.get('/', async (req, res) => {
   try {
     const categoryData = await Category.findAll({
-      include: [{ model: Product }],
+      // be sure to include its associated Category and Tag data
+      indclude: [{ model: Product }],
     });
-    // 200 status code means the request is successful
+
     res.status(200).json(categoryData);
   } catch (err) {
-    // 400 status code means the server could not understand the request
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
-
+//not working
 router.get('/:id', async (req, res) => {
   // find one category by its `id` value and be sure to include its associated Products
   // Get one category from the category table
@@ -50,9 +49,6 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  console.log("put");
-  console.log(req.params);
-  console.log(req.body);
   // update a category by its `id` value
   try {
     const categoryData = await Category.update(req.body, {
@@ -60,15 +56,16 @@ router.put('/:id', async (req, res) => {
         id: req.params.id,
       },
     });
+
     if (!categoryData) {
-      res.status(404).json({
+      res.status(400).json({
         message: "No category with that id",
       });
       return;
     }
     res.status(200).json(categoryData);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 
