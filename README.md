@@ -5,6 +5,7 @@
 ## Table of Contents
 [Description](#description)<br>
 [Usage](#usage)<br>
+[Demo Video](#demo-video)<br>
 [Contributing](#contributing)<br>
 [License Link](#license-link)<br>
 [License Description](#license-description)<br>
@@ -14,13 +15,22 @@
 This repo demonstrates how the back end of a website is constructed using Object Relational Mapping or ORM. In this repo you will find javascript files containing models and routes used to create, read, update and delete (CRUD) files in a mysql2 database.
     
 ## Usage 
-1. If you would like to learn more you can download or fork the files in this repo. 
-2. The models folder contains each of the models that help shape the database tables
-3. The routes folder contains the javascript code needed to cread, read, update and delete files from the database.
-4. You will need to update the .env.example file with your db connection credentials in order to connect to the database (ecommerce_db).
+1. If you would like to learn more you can download or fork the files in this repo.
+2. In terminal and from the DB folder, run mysql2 by typing <code>mysql -u "yourusername" -p</code> and then enter your password. Your username is your database username. Do not include the parentheses.
+3. Run source <code>schema.sql;</code>
+4. Type <code>exit</code> to exit out of mysql
+5. Open the <code>server.js</code> file in a new integrated terminal.
+6. Type <code>run node seed</code> to seed your database tables.
+7. Start your server by typing <code>node server.js</code> or <code>npx nodemon</code> if you have nodemon installed.
+8. The <code>models</code> folder contains each of the models that create the database tables
+9. The <code>routes</code> folder contains the javascript code needed to cread, read, update and delete files from the database.
+
+## Demo Video
+- Video Demo: [E-Commerce](https://drive.google.com/file/d/1I07TeFUHdPaUgLUZr31Fcfd-tJmZi3Lb/view?usp=drive_link)
     
 ## Contributing 
-EDX bootcamp instructors.
+- EDX bootcamp instructors
+- EDX Tutor Sandy Smith
 
 ## License Link
 https://www.mit.edu/~amini/LICENSE.md
